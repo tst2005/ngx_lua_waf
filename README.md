@@ -1,3 +1,144 @@
+# # ngx_lua_waf
+
+ngx_lua_waf tour is interesting, when I started going to the office to develop a web application firewall based ngx_lua.
+
+Code is very simple, the main intention is to develop the use of simple, high-performance and lightweight.
+
+Now open up, to comply with MIT license agreement. Which includes our filtering rules. If you have any suggestions and would like fa, and I welcome the perfect together.
+
+# # # Usage:
+    
+Prevent sql injection, local contain, some overflow, fuzzing test, xss, SSRF and other web attacks
+Prevent svn / backup class file leak
+ApacheBench prevent attacks like stress testing tool
+Shielding common hacking tools to scan, the scanner
+Abnormal network requests shield
+Shielding Pictures directory php execute permissions Accessories
+Upload prevent webshell
+
+# # # Recommended installation:
+
+Recommended lujit2.1 do lua support
+
+ngx_lua If it is 0.9.2 or later, we recommend regular filter function to ngx.re.find, matching efficiency will be increased by about three times.
+
+
+# # # Usage:
+
+nginx installation path is assumed to be :/ usr / local / nginx / conf /
+
+The ngx_lua_waf downloaded to conf directory, unzip named waf
+
+Http section added in nginx.conf
+
+lua_package_path "/ usr / local / nginx / conf / waf / lua?.";
+         lua_shared_dict limit 10m;
+         init_by_lua_file / usr / local / nginx / conf / waf / init.lua;
+     access_by_lua_file / usr / local / nginx / conf / waf / waf.lua;
+
+Waf rules in the configuration config.lua directory (usually in waf / conf / directory)
+
+         RulePath = "/ usr / local / nginx / conf / waf / wafconf /"
+
+Absolute paths are subject to change, the need to modify the corresponding
+
+Then you can restart nginx
+
+
+# # # Configuration file Details:
+
+     RulePath = "/ usr / local / nginx / conf / waf / wafconf /"
+         - Rule store directory
+         attacklog = "off"
+         - Whether to open the attack information recorded, you need to configure logdir
+         logdir = "/ usr / local / nginx / logs / hack /"
+         - log storage directory, which requires the user to own a new, cutting the need nginx users can write permissions
+         UrlDeny = "on"
+         - Whether the interceptor url visit
+         Redirect = "on"
+         - Whether the interceptor after redirect
+         CookieMatch = "on"
+         - Whether the cookie blocking attacks
+         postMatch = "on"
+         - Whether to intercept post attack
+         whiteModule = "on"
+         - Whether to open the URL whitelist
+         ipWhitelist = {"127.0.0.1"}
+         - ip whitelist, multiple ip separated by commas
+         ipBlocklist = {"1.0.0.1"}
+         - ip blacklist, multiple ip separated by commas
+         CCDeny = "on"
+         - Whether to open blocked cc attack (the http segment increased need nginx.conf lua_shared_dict limit 10m ;)
+         CCrate = "100/60"
+         - Set cc attack frequency, in seconds.
+         - Default 1 minute with an IP address can only request the same 100 times
+         html = [[Please go away ~ ~]]
+         - Warnings can be customized within the brackets
+         NOTE: Do not tamper with double quotes, case sensitive
+        
+# # # Check whether the rules in force
+
+Deployed can try the following command:
+  
+         curl http://xxxx/test.php?id=../etc/passwd
+         Return "Please go away ~ ~" character, explained the rules take effect.
+
+Note: By default, the machine is not in the whitelist filtering, self-configuration can be adjusted config.lua
+
+
+# # # Renderings as follows:
+
+! [sec] (http://i.imgur.com/wTgOcm2.png)
+
+! [sec] (http://i.imgur.com/DqU30au.png)
+
+# # # Rule update:
+
+Taking into account the regular cache problem, dynamic rules affect performance, so the shared memory temporarily useless things like dictionaries and redis for dynamic management.
+
+Rules update rules files can be placed into other servers via crontab tasks regularly download to update the rules, nginx reload to take effect. To protect ngx lua waf performance.
+
+Filter log records only, not open filter, in the code in front of the check plus - Notes can be, if you need to filter, and vice versa
+
+# # # Some explanations:
+
+Filtering rules in wafconf, can be adjusted according to the needs of their own, need to wrap each rule, or use | Split
+
+global is a global filter files, which rules on the post and get all filters
+get only get request filtering rules
+post is the only post request filtering rules
+whitelist is a white list, which makes the filter matched to the url
+user-agent is a user-agent filtering rules
+
+
+Enabled by default get and post filtering, cookie filtering need to open, edit waf.lua cancel part - Notes to
+
+Log file name format is as follows: virtual host name _sec.log
+
+
+# # Copyright
+
+<table>
+   <tr>
+     <td> Weibo </ td> <td> magical magician </ td>
+   </ tr>
+   <tr>
+     <td> Forum </ td> <td> http://bbs.linuxtone.org/ </ td>
+   </ tr>
+   <tr>
+     <td> Copyright </ td> <td> Copyright (c) 2013 - loveshell </ td>
+   </ tr>
+   <tr>
+     <td> License </ td> <td> MIT License </ td>
+   </ tr>
+</ table>
+
+Thank ngx_lua module developers [@ agentzh] (https://github.com/agentzh/), Chun is what I have come into contact with the spirit of open source best people
+
+
+
+
+
 ##ngx_lua_waf
 
 ngx_lua_waf是我刚入职趣游时候开发的一个基于ngx_lua的web应用防火墙。
