@@ -1,4 +1,4 @@
-# # ngx_lua_waf
+## ngx_lua_waf
 
 ngx_lua_waf tour is interesting, when I started going to the office to develop a web application firewall based ngx_lua.
 
@@ -6,7 +6,7 @@ Code is very simple, the main intention is to develop the use of simple, high-pe
 
 Now open up, to comply with MIT license agreement. Which includes our filtering rules. If you have any suggestions and would like fa, and I welcome the perfect together.
 
-# # # Usage:
+### Usage:
     
 Prevent sql injection, local contain, some overflow, fuzzing test, xss, SSRF and other web attacks
 Prevent svn / backup class file leak
@@ -16,14 +16,14 @@ Abnormal network requests shield
 Shielding Pictures directory php execute permissions Accessories
 Upload prevent webshell
 
-# # # Recommended installation:
+### Recommended installation:
 
 Recommended lujit2.1 do lua support
 
 ngx_lua If it is 0.9.2 or later, we recommend regular filter function to ngx.re.find, matching efficiency will be increased by about three times.
 
 
-# # # Usage:
+### Usage:
 
 nginx installation path is assumed to be :/ usr / local / nginx / conf /
 
@@ -45,7 +45,7 @@ Absolute paths are subject to change, the need to modify the corresponding
 Then you can restart nginx
 
 
-# # # Configuration file Details:
+### Configuration file Details:
 
      RulePath = "/ usr / local / nginx / conf / waf / wafconf /"
          - Rule store directory
@@ -76,7 +76,7 @@ Then you can restart nginx
          - Warnings can be customized within the brackets
          NOTE: Do not tamper with double quotes, case sensitive
         
-# # # Check whether the rules in force
+### Check whether the rules in force
 
 Deployed can try the following command:
   
@@ -86,13 +86,13 @@ Deployed can try the following command:
 Note: By default, the machine is not in the whitelist filtering, self-configuration can be adjusted config.lua
 
 
-# # # Renderings as follows:
+### Renderings as follows:
 
 ! [sec] (http://i.imgur.com/wTgOcm2.png)
 
 ! [sec] (http://i.imgur.com/DqU30au.png)
 
-# # # Rule update:
+### Rule update:
 
 Taking into account the regular cache problem, dynamic rules affect performance, so the shared memory temporarily useless things like dictionaries and redis for dynamic management.
 
@@ -100,7 +100,7 @@ Rules update rules files can be placed into other servers via crontab tasks regu
 
 Filter log records only, not open filter, in the code in front of the check plus - Notes can be, if you need to filter, and vice versa
 
-# # # Some explanations:
+### Some explanations:
 
 Filtering rules in wafconf, can be adjusted according to the needs of their own, need to wrap each rule, or use | Split
 
