@@ -7,7 +7,7 @@ Code is very simple, the main intention is to develop the use of simple, high-pe
 Now open up, to comply with MIT license agreement. Which includes our filtering rules. If you have any suggestions and would like fa, and I welcome the perfect together.
 
 ### Usage:
-    
+
 Prevent sql injection, local contain, some overflow, fuzzing test, xss, SSRF and other web attacks
 Prevent svn / backup class file leak
 ApacheBench prevent attacks like stress testing tool
@@ -75,11 +75,11 @@ Then you can restart nginx
          html = [[Please go away ~ ~]]
          - Warnings can be customized within the brackets
          NOTE: Do not tamper with double quotes, case sensitive
-        
+
 ### Check whether the rules in force
 
 Deployed can try the following command:
-  
+
          curl http://xxxx/test.php?id=../etc/passwd
          Return "Please go away ~ ~" character, explained the rules take effect.
 
@@ -116,7 +116,7 @@ Enabled by default get and post filtering, cookie filtering need to open, edit w
 Log file name format is as follows: virtual host name _sec.log
 
 
-# # Copyright
+## Copyright
 
 <table>
    <tr>
@@ -133,7 +133,7 @@ Log file name format is as follows: virtual host name _sec.log
    </ tr>
 </ table>
 
-Thank ngx_lua module developers [@ agentzh] (https://github.com/agentzh/), Chun is what I have come into contact with the spirit of open source best people
+Thank ngx_lua module developers [@ agentzh](https://github.com/agentzh/), Chun is what I have come into contact with the spirit of open source best people
 
 
 
@@ -148,7 +148,7 @@ ngx_lua_waf是我刚入职趣游时候开发的一个基于ngx_lua的web应用�
 现在开源出来，遵从MIT许可协议。其中包含我们的过滤规则。如果大家有什么建议和想fa，欢迎和我一起完善。
 
 ###用途：
-    	
+
 	防止sql注入，本地包含，部分溢出，fuzzing测试，xss,SSRF等web攻击
 	防止svn/备份之类文件泄漏
 	防止ApacheBench之类压力测试工具的攻击
@@ -174,7 +174,7 @@ nginx安装路径假设为:/usr/local/nginx/conf/
 
 		lua_package_path "/usr/local/nginx/conf/waf/?.lua";
         lua_shared_dict limit 10m;
-        init_by_lua_file  /usr/local/nginx/conf/waf/init.lua; 
+        init_by_lua_file  /usr/local/nginx/conf/waf/init.lua;
     	access_by_lua_file /usr/local/nginx/conf/waf/waf.lua;
 
 配置config.lua里的waf规则目录(一般在waf/conf/目录下)
@@ -200,9 +200,9 @@ nginx安装路径假设为:/usr/local/nginx/conf/
         --是否拦截后重定向
         CookieMatch = "on"
         --是否拦截cookie攻击
-        postMatch = "on" 
+        postMatch = "on"
         --是否拦截post攻击
-        whiteModule = "on" 
+        whiteModule = "on"
         --是否开启URL白名单
         ipWhitelist={"127.0.0.1"}
         --ip白名单，多个ip用逗号分隔
@@ -216,11 +216,11 @@ nginx安装路径假设为:/usr/local/nginx/conf/
         html=[[Please go away~~]]
         --警告内容,可在中括号内自定义
         备注:不要乱动双引号，区分大小写
-        
+
 ###检查规则是否生效
 
-部署完毕可以尝试如下命令：        
-  
+部署完毕可以尝试如下命令：
+
         curl http://xxxx/test.php?id=../etc/passwd
         返回"Please go away~~"字样，说明规则生效。
 
@@ -244,16 +244,16 @@ nginx安装路径假设为:/usr/local/nginx/conf/
 ###一些说明：
 
 	过滤规则在wafconf下，可根据需求自行调整，每条规则需换行,或者用|分割
-	
-		global是全局过滤文件，里面的规则对post和get都过滤		
-		get是只在get请求过滤的规则		
-		post是只在post请求过滤的规则		
-		whitelist是白名单，里面的url匹配到不做过滤		
+
+		global是全局过滤文件，里面的规则对post和get都过滤
+		get是只在get请求过滤的规则
+		post是只在post请求过滤的规则
+		whitelist是白名单，里面的url匹配到不做过滤
 		user-agent是对user-agent的过滤规则
-	
+
 
 	默认开启了get和post过滤，需要开启cookie过滤的，编辑waf.lua取消部分--注释即可
-	
+
 	日志文件名称格式如下:虚拟主机名_sec.log
 
 
@@ -273,5 +273,5 @@ nginx安装路径假设为:/usr/local/nginx/conf/
     <td>License</td><td>MIT License</td>
   </tr>
 </table>
-	
+
 感谢ngx_lua模块的开发者[@agentzh](https://github.com/agentzh/),春哥是我所接触过开源精神最好的人
