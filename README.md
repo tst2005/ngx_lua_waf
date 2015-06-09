@@ -9,7 +9,7 @@ Now open up, to comply with MIT license agreement. Which includes our filtering 
 ### Usage:
 
 Prevent sql injection, local contain, some overflow, fuzzing test, xss, SSRF and other web attacks
-Prevent svn / backup class file leak
+Prevent svn/backup class file leak
 ApacheBench prevent attacks like stress testing tool
 Shielding common hacking tools to scan, the scanner
 Abnormal network requests shield
@@ -25,20 +25,23 @@ ngx_lua If it is 0.9.2 or later, we recommend regular filter function to ngx.re.
 
 ### Usage:
 
-nginx installation path is assumed to be :/ usr / local / nginx / conf /
+nginx installation path is assumed to be `/usr/local/nginx/conf/`
 
 The ngx_lua_waf downloaded to conf directory, unzip named waf
 
 Http section added in nginx.conf
+```
+	lua_package_path "/usr/local/nginx/conf/waf/?.lua";
+	lua_shared_dict limit 10m;
+	init_by_lua_file "/usr/local/nginx/conf/waf/init.lua";
+	access_by_lua_file "/usr/local/nginx/conf/waf/waf.lua";
+```
 
-lua_package_path "/ usr / local / nginx / conf / waf / lua?.";
-         lua_shared_dict limit 10m;
-         init_by_lua_file / usr / local / nginx / conf / waf / init.lua;
-     access_by_lua_file / usr / local / nginx / conf / waf / waf.lua;
+Waf rules in the configuration config.lua directory (usually in waf/conf/directory)
 
-Waf rules in the configuration config.lua directory (usually in waf / conf / directory)
-
-         RulePath = "/ usr / local / nginx / conf / waf / wafconf /"
+```
+         RulePath = "/usr/local/nginx/conf/waf/wafconf/"
+```
 
 Absolute paths are subject to change, the need to modify the corresponding
 
@@ -47,6 +50,7 @@ Then you can restart nginx
 
 ### Configuration file Details:
 
+```
      RulePath = "/ usr / local / nginx / conf / waf / wafconf /"
          - Rule store directory
          attacklog = "off"
@@ -75,22 +79,24 @@ Then you can restart nginx
          html = [[Please go away ~ ~]]
          - Warnings can be customized within the brackets
          NOTE: Do not tamper with double quotes, case sensitive
+```
 
 ### Check whether the rules in force
 
 Deployed can try the following command:
 
-         curl http://xxxx/test.php?id=../etc/passwd
-         Return "Please go away ~ ~" character, explained the rules take effect.
+	`curl http://xxxx/test.php?id=../etc/passwd`
+	Return "Please go away ~ ~" character, explained the rules take effect.
+
 
 Note: By default, the machine is not in the whitelist filtering, self-configuration can be adjusted config.lua
 
 
 ### Renderings as follows:
 
-! [sec] (http://i.imgur.com/wTgOcm2.png)
+![sec](http://i.imgur.com/wTgOcm2.png)
 
-! [sec] (http://i.imgur.com/DqU30au.png)
+![sec](http://i.imgur.com/DqU30au.png)
 
 ### Rule update:
 
@@ -166,20 +172,24 @@ ngx_lua如果是0.9.2以上版本，建议正则过滤函数改为ngx.re.find，
 
 ###使用说明：
 
-nginx安装路径假设为:/usr/local/nginx/conf/
+nginx安装路径假设为: `/usr/local/nginx/conf/`
 
 把ngx_lua_waf下载到conf目录下,解压命名为waf
 
 在nginx.conf的http段添加
 
-		lua_package_path "/usr/local/nginx/conf/waf/?.lua";
+```
+	lua_package_path "/usr/local/nginx/conf/waf/?.lua";
         lua_shared_dict limit 10m;
         init_by_lua_file  /usr/local/nginx/conf/waf/init.lua;
     	access_by_lua_file /usr/local/nginx/conf/waf/waf.lua;
+```
 
 配置config.lua里的waf规则目录(一般在waf/conf/目录下)
 
-        RulePath = "/usr/local/nginx/conf/waf/wafconf/"
+```
+	RulePath = "/usr/local/nginx/conf/waf/wafconf/"
+```
 
 绝对路径如有变动，需对应修改
 
@@ -188,6 +198,7 @@ nginx安装路径假设为:/usr/local/nginx/conf/
 
 ###配置文件详细说明：
 
+```
     	RulePath = "/usr/local/nginx/conf/waf/wafconf/"
         --规则存放目录
         attacklog = "off"
@@ -216,6 +227,7 @@ nginx安装路径假设为:/usr/local/nginx/conf/
         html=[[Please go away~~]]
         --警告内容,可在中括号内自定义
         备注:不要乱动双引号，区分大小写
+```
 
 ###检查规则是否生效
 
